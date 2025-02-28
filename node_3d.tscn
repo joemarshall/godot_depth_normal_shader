@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvey4qq0e12el"]
+
+[ext_resource type="Shader" path="res://normal_layer_5.gdshader" id="1_75h18"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdvi2"]
+render_priority = 0
+shader = ExtResource("1_75h18")
+
+[sub_resource type="Environment" id="Environment_oavnp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5wtq4"]
+render_priority = 0
+shader = ExtResource("1_75h18")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.25074)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_cull_mask = 4294966288
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewport"]
+layers = 17
+radial_segments = 32
+rings = 32
+material = SubResource("ShaderMaterial_tdvi2")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.547)
+cull_mask = 1047568
+environment = SubResource("Environment_oavnp")
+projection = 1
+current = true
+near = 1.0
+far = 3.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewport"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+layers = 17
+size = Vector3(1, 1, 0.1)
+material = SubResource("ShaderMaterial_5wtq4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326696, 0.291358, 2.24784)
+cull_mask = 1047553
+current = true
