@@ -17,5 +17,5 @@ config/icon="res://icon.svg"
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+rendering_device/fallback_to_d3d12=false
+renderer/rendering_method.web="mobile"

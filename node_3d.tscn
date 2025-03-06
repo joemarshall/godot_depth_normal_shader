@@ -1,6 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvey4qq0e12el"]
+[gd_scene load_steps=10 format=3 uid="uid://cvey4qq0e12el"]
 
+[ext_resource type="Script" path="res://run_compute_shader.gd" id="1_10y5q"]
 [ext_resource type="Shader" path="res://normal_layer_5.gdshader" id="1_75h18"]
+[ext_resource type="Texture2D" uid="uid://5fi6ipi6x1ya" path="res://normal_texture.tres" id="2_nd5py"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_k8fp1"]
+ground_color = Color(0.224213, 0.505661, 0.27279, 1)
+
+[sub_resource type="Sky" id="Sky_m1bwg"]
+sky_material = SubResource("PhysicalSkyMaterial_k8fp1")
+
+[sub_resource type="Environment" id="Environment_iu7q5"]
+background_mode = 2
+sky = SubResource("Sky_m1bwg")
+ambient_light_color = Color(0.473976, 0.473976, 0.473976, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tdvi2"]
 render_priority = 0
@@ -13,14 +26,23 @@ render_priority = 0
 shader = ExtResource("1_75h18")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_10y5q")
+viewportTexture = ExtResource("2_nd5py")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326696, 0.291358, 2.24784)
+cull_mask = 1047553
+environment = SubResource("Environment_iu7q5")
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.25074)
+transform = Transform3D(-0.146587, -0.780323, 0.607954, -0.155336, 0.625126, 0.76491, -0.976925, 0.0176883, -0.212848, 3.01726, 0.417545, 2.24784)
+light_bake_mode = 1
 
 [node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
+handle_input_locally = false
 canvas_cull_mask = 4294966288
-size = Vector2i(32, 32)
+size = Vector2i(128, 128)
 render_target_update_mode = 4
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewport"]
@@ -30,7 +52,7 @@ rings = 32
 material = SubResource("ShaderMaterial_tdvi2")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.547)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 cull_mask = 1047568
 environment = SubResource("Environment_oavnp")
 projection = 1
@@ -43,8 +65,3 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 layers = 17
 size = Vector3(1, 1, 0.1)
 material = SubResource("ShaderMaterial_5wtq4")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326696, 0.291358, 2.24784)
-cull_mask = 1047553
-current = true
